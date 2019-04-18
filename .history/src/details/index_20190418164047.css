@@ -1,0 +1,128 @@
+.movie-details {
+    margin-top: 80px;
+}
+
+.movie-details .title {
+    background:linear-gradient(to right, #A84914 , #552B13 50%, #552b13);
+}
+
+.movie-details .title .area {
+    height: 350px;
+    width: 65%;
+    margin: 0 auto -20px;
+    position: relative;
+}
+
+.movie-details .title .area .movie-img{
+    width: 205px;
+    height: 295px;
+    float: left;
+    position: relative;
+    top: 90px
+}
+
+.movie-details .title .area .movie-img img {
+    width: 100%;
+    height: 100%;
+    border: 4px solid #ffffff;
+}
+
+
+.movie-details .title .area .movie-list {
+    color: #ffffff;
+    position: relative;
+    left: 50px;
+    top: 90px;
+}
+
+.movie-details .title .area .movie-list .movie-item {
+    margin-bottom: 10px
+}
+
+.movie-details .title .area .movie-list # {
+    font-size: 26px
+}
+
+.movie-details .container{
+    margin-top: 100px;
+}
+
+.movie-details .container .area {
+    width: 50%;
+    height: 1200px;
+    margin: 0 auto;
+}
+
+.movie-details .container .area .item-list {
+    border-bottom: 2px solid #eee;
+    line-height: 100%;
+    margin-bottom: 100px;
+    height: 28px;
+}
+
+.movie-details .container .area .item-list .tab-title{
+    cursor: pointer;
+    float: left;
+    margin-right: 30px;
+    margin-bottom: -2px;
+    padding-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+    line-height: 100%;
+    border-bottom: 2px solid transparent;
+}
+.movie-details .container .area .item-list .tab-title.active{
+    color: #ef4238;
+    border-bottom: 2px solid #ef4238;
+}
+.movie-details .container .area .item-list .tab-title{
+    cursor: pointer;
+    float: left;
+    margin-right: 20px
+}
+
+.movie-details .container .area .item-list,
+.movie-details .container .area .plot,
+.movie-details .container .area .office-list {
+    margin-bottom: 100px;
+}
+
+.movie-details .container .area .plot .plot-head,
+.movie-details .container .area .office-list .office-head {
+    border-left: 4px solid #ef4238;;
+}
+
+.movie-details .container .area .plot .plot-head h3,
+.movie-details .container .area .office-list .office-head h3 {
+    line-height: 100%;
+    margin-left: 7px;
+}
+
+.movie-details .container .area .plot .plot-content,
+.movie-details .container .area .office-list .office-content {
+    margin-top: 20px;
+}
+
+.movie-details .container .area .office-list .office-content .office-item {
+    float: left;
+    margin: 0 10px 0
+}
+
+.movie-details .container .area .office-list .office-content .office-item .director-ul,
+.movie-details .container .area .office-list .office-content .office-item .actor-ul {
+    margin-top: 10px
+}
+
+.movie-details .container .area .office-list .office-content .office-item li{
+    list-style-type: none;
+    float: left;
+    width: 120px;
+    margin: 0 10px 0 0;
+    text-align: center;
+    color: #8e8e8e;
+}
+
+.movie-details .container .area .office-list .office-content .office-item img {
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,6 @@
+{
+    "html.format.indentHandlebars": true,
+    "editor.detectIndentation": false,
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true
+}
