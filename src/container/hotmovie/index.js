@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import all from '../../images/arrow_right.png'
 import fetchJsonp from 'fetch-jsonp'
 import { inject, observer } from 'mobx-react/index'
-import { Spin } from "antd";
 
 @inject('appStore')
 @observer
@@ -30,6 +29,7 @@ class HotMovie extends Component{
                 this.setState({
                     list: result['subjects']
                 })
+                this.props.appStore.refreshSign(false);
             });
     }
 
@@ -90,10 +90,7 @@ class HotMovie extends Component{
                 </div>
                 <div className="movie-list">
                     <dl className="movie_dl">
-                        <Spin spinning={this.state.list ? false : true} 
-                        size="large" className="movie-spin">
-                            {dd_list}
-                        </Spin>
+                        {dd_list}
                     </dl>
                     <div className="movie-clear"></div>
                 </div>

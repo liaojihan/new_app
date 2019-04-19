@@ -63,21 +63,32 @@
     width: 20px;
     border: 1px solid #d8d8d8;
     margin: 0 15px 0 0;
+    cursor: pointer;
 }
 
-.all-movie .all-content .movie-container .page-ul li a.active {
-    background-color: #EF4238;
+.all-movie .all-content .movie-container .page-ul li.active a {
     color: #ffffff;
+}
+
+.all-movie .all-content .movie-container .page-ul li.ban a {
+    color: rgb(7, 6, 6);
+}
+
+.all-movie .all-content .movie-container .page-ul li.active {
+    background-color: rgb(231, 34, 24);
+}
+
+.all-movie .all-content .movie-container .page-ul li.ban {
+    background: #ffffff;
+}
+
+.all-movie .all-content .movie-container .page-ul li:hover {
+    border: 1px solid rgb(231, 34, 24);
 }
 
 /* .all-movie .all-content .movie-container .page-ul li a {
     padding: 0 12px;
 } */
-
-.all-movie .all-content .movie-container .page-ul li a:link{
-    text-decoration: none;
-    color: #A84914;
-}
 
 .movie-spin {
     position:absolute;

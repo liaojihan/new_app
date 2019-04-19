@@ -23,7 +23,7 @@ class App extends Component {
 
 
     render() {
-        console.log(this.props.appStore.refreshCode);
+        this.props.appStore.refreshSign(true);
         return (
             <div className="App">
                 <Header code={this.props.appStore.refreshCode}/>
@@ -37,13 +37,13 @@ class App extends Component {
                                     return <Container/>;
 
                                 case 1:
-                                    return <Top url={this.state.film_url}/> ;
+                                    return <Top url={this.state.film_url} title="正在热映"/> ;
 
                                 case 2:
-                                    return <Top url={this.state.release_url}/> ;
+                                    return <Top url={this.state.release_url} title="即将上映"/> ;
 
                                 case 3:
-                                    return <Top url={this.state.top_url}/>;
+                                    return <Top url={this.state.top_url} title="豆瓣TOP排行"/>;
 
                                 default:
                                     return <Details movie_id={this.props.appStore.id} url={this.state.detail_url}/>;

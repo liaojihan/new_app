@@ -3,7 +3,8 @@ import { observable, action } from 'mobx'
 class AppStore {
 
     @observable refreshCode = 0; // 0:首页，1:电影，2: 榜单， 3: 详情
-    @observable id = 0;
+    @observable id = 0; // 详情页ID
+    @observable loadingSign = true; //是否加载loading
 
     @action
     refresh (code) {
@@ -14,6 +15,11 @@ class AppStore {
     refreshCodeAndId(code, id){
         this.refreshCode = code;
         this.id = id;
+    }
+
+    @action
+    refreshSign(sign) {
+        this.loadingSign = sign;
     }
 
 }

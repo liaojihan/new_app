@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import fetchJsonp from 'fetch-jsonp'
 import { inject, observer } from 'mobx-react/index'
-import { Spin } from 'antd'
 
 @inject('appStore') 
 @observer
@@ -29,7 +28,8 @@ class TodayBox extends Component{
                 console.log(result);
                 this.setState({
                     list: result['subjects']
-                })
+                });
+                this.props.appStore.refreshSign(false);
             });
     }
 
@@ -93,10 +93,7 @@ class TodayBox extends Component{
                 </div>
                 <div className="movie-list">
                     <ul className="movie-ul">
-                        <Spin spinning={this.state.list ? false : true} 
-                            size="large" className="movie-spin">
-                            {li_list}
-                        </Spin>
+                        {li_list}
                     </ul>
                     <div className="movie-clear"></div>
                 </div>

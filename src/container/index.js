@@ -4,7 +4,11 @@ import HotMovie from "./hotmovie";
 import TodayBox from "./todaybox";
 import Soon from "./soon";
 import Top10 from "./top10";
+import { Spin } from "antd";
+import { inject, observer } from "mobx-react"
 
+@inject('appStore')
+@observer
 class Container extends React.Component{
 
     constructor(props){
@@ -24,16 +28,18 @@ class Container extends React.Component{
     render (){
         return (
             <div className="container">
-                <div className="content">
-                    <div className="showing-up">
-                        <HotMovie title="正在热映" url={this.state.url1[0]}/>
-                        <TodayBox title="北美今日票房" url={this.state.url1[1]}/>
+                <Spin spinning={this.props.appStore.loadingSign ? true : false} size="large">
+                    <div className="content">
+                        <div className="showing-up">
+                            <HotMovie title="正在热映" url={this.state.url1[0]}/>
+                            <TodayBox title="北美今日票房" url={this.state.url1[1]}/>
+                        </div>
+                        <div className="shown-soon">
+                            <Soon title="即将上映" url={this.state.url2[0]}/>
+                            <Top10 title="TOP10" url={this.state.url2[1]}/>
+                        </div>
                     </div>
-                    <div className="shown-soon">
-                        <Soon title="即将上映" url={this.state.url2[0]}/>
-                        <Top10 title="TOP10" url={this.state.url2[1]}/>
-                    </div>
-                </div>
+                </Spin>
             </div>
         );
     }
