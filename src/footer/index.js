@@ -4,11 +4,11 @@ import './index.css'
 class Footer extends Component{
     render (){
         return (
-            <div className="footer">
+            <footer className="footer">
                 <div className="content">
                     <span>create Best Film @2019 by JiHanLiao</span>
                 </div>
-            </div>
+            </footer>
         );
     }
 }

@@ -1,7 +1,11 @@
 import React from 'react'
+import { Menu, Icon } from 'antd';
 import './index.css'
 import topImage from '../images/film.jpg'
 import { inject, observer } from 'mobx-react/index'
+import { Link, Route } from 'react-router-dom'
+import Container from '../container'
+
 
 @inject('appStore') 
 @observer
@@ -15,10 +19,6 @@ class Header extends React.Component{
         }
     }
 
-    componentDidMount(){
-
-    }
-
     handleStatus = index => {
         this.setState({
             isClick: parseInt(index)
@@ -27,34 +27,10 @@ class Header extends React.Component{
     };
 
     render (){
-        const nav_ul = ['首页', '热映', '上映', '榜单'];
-        const nav_list = nav_ul.map( (value, index) => {
-             return (
-                 <li key={index}>
-                    <a href="#" onClick={(e) => this.handleStatus(index, e)}
-                        className={this.props.appStore.refreshCode === index ? 'active' : ''}>
-                        {value}
-                    </a>
-                 </li>
-             );
-        });
+        const nav_ul = [['首页', '/'], ['热映', '/hot'], ['上映', '/soon'], ['榜单',  '/rank']];
         return (
             // 导航栏内容
-            <div className="top">
-                <div className="content">
-                    <div className="left">
-                        <img src={topImage} alt=""/>
-                    </div>
-                    <div className="nav">
-                        <ul>
-                            {nav_list}
-                        </ul>
-                    </div>
-                    <form>
-                        <input type="search" placeholder="找影片、找影人" className="search"/>
-                    </form>
-                </div>
-            </div>
+            null
         );
     }
 }

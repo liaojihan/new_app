@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import all from '../../images/arrow_right.png'
 import fetchJsonp from 'fetch-jsonp'
 import { inject, observer } from 'mobx-react/index'
+import { Spin } from "antd";
 
 @inject('appStore')
 @observer
@@ -10,7 +11,8 @@ class HotMovie extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            list: null
+            list: null,
+            sign: true
         }
     }
 
@@ -27,9 +29,9 @@ class HotMovie extends Component{
         ).then(response => response.json())
             .then(result => {
                 this.setState({
-                    list: result['subjects']
+                    list: result['subjects'],
+                    sign: false
                 })
-                this.props.appStore.refreshSign(false);
             });
     }
 
@@ -83,17 +85,19 @@ class HotMovie extends Component{
         }
         return (
             <div className="movie-grid">
-                <div className="head">
-                    <img src={all} alt=""/>
-                    <span className="all"><a href="#">全部</a></span>
-                    <span className="hot">{this.props.title}</span>
-                </div>
-                <div className="movie-list">
-                    <dl className="movie_dl">
-                        {dd_list}
-                    </dl>
-                    <div className="movie-clear"></div>
-                </div>
+                <Spin size="large" spinning={this.state.sign ? true : false}>
+                    <div className="head">
+                        <img src={all} alt=""/>
+                        <span className="all"><a href="#">全部</a></span>
+                        <span className="hot">{this.props.title}</span>
+                    </div>
+                    <div className="movie-list">
+                        <dl className="movie_dl">
+                            {dd_list}
+                        </dl>
+                        <div className="movie-clear"></div>
+                    </div>
+                </Spin>
             </div>
         );
     }

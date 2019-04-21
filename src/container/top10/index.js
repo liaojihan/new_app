@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import fetchJsonp from 'fetch-jsonp'
 import { inject, observer } from 'mobx-react/index'
+import { Spin } from 'antd';
 
 @inject('appStore') 
 @observer
@@ -8,7 +9,8 @@ class Top10 extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            list: null
+            list: null,
+            sign: true
         }
     }
 
@@ -24,11 +26,10 @@ class Top10 extends Component{
             }
         ).then(response => response.json())
             .then(result => {
-                console.log(result);
                 this.setState({
-                    list: result['subjects']
+                    list: result['subjects'],
+                    sign: false
                 });
-                this.props.appStore.refreshSign(false);
             });
     }
 
@@ -71,15 +72,17 @@ class Top10 extends Component{
         }
         return (
             <div className="movie-top">
-                <div className="head">
-                    <span className="top-today">{this.props.title}</span>
-                </div>
-                <div className="movie-list">
-                    <ul className="movie-ul">
-                        {li_list}
-                    </ul>
-                    <div className="movie-clear"></div>
-                </div>
+                <Spin spinning={this.state.sign ? true : false} size="large">
+                    <div className="head">
+                        <span className="top-today">{this.props.title}</span>
+                    </div>
+                    <div className="movie-list">
+                        <ul className="movie-ul">
+                            {li_list}
+                        </ul>
+                        <div className="movie-clear"></div>
+                    </div>
+                </Spin>
             </div>
         );
     }

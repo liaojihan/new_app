@@ -3,6 +3,7 @@ import fetchJsonp from 'fetch-jsonp'
 import { inject, observer } from 'mobx-react'
 import './index.css'
 import { Spin, message } from 'antd';
+import { withRouter } from "react-router-dom";
 
 const info = () => {
     message.info("当前数据为空");
@@ -10,6 +11,7 @@ const info = () => {
 
 @inject('appStore') 
 @observer
+@withRouter
 class Top extends Component{
 
     constructor(props) {
@@ -18,11 +20,13 @@ class Top extends Component{
             list: null,
             pageCurrent: 1, //当前页码
             pageSize: 24, //本页size
-            pageTotal: 0 //总页数
+            pageTotal: 0, //总页数
+            sign: true // 是否加载loading
         }
     }   
 
     loadList = (value, url) => {
+        console.log("执行了ajax");
         fetchJsonp(
             url + 
             '&start=' + 
@@ -37,14 +41,18 @@ class Top extends Component{
             }
         ).then(response => response.json())
             .then(result => {
-                console.log(result);
                 this.setState({
                     list: typeof(result.entries) == 'undefined' ? result.subjects : result.entries,
                     pageCurrent: value,
                     pageStart: value * this.state.pageSize - this.state.pageSize,
-                    pageTotal: Math.floor((result.total + this.state.pageSize - 1) / this.state.pageSize)
-                }, () => this.props.appStore.refreshSign(false));
+                    pageTotal: Math.floor((result.total + this.state.pageSize - 1) / this.state.pageSize),
+                    sign: false
+                });
             });
+    }
+
+    componentWillMount() {
+        console.log(this.props.location);
     }
 
     componentDidMount() {
@@ -58,6 +66,9 @@ class Top extends Component{
     }
 
     componentWillReceiveProps(nextProps) {
+        this.setState({
+            sign: true
+        });
         this.loadList(1, nextProps.url);
     }
 
@@ -69,27 +80,30 @@ class Top extends Component{
     }
 
     pageHandler = value => {
-
+        // 翻页处理
         if (this.state.pageCurrent === value){
             return;
         }
-        this.props.appStore.refreshSign(true);
+        this.setState({
+            sign: true
+        });
         this.loadList(value, this.props.url);
     }
 
     detailHandler = value => {
+        // 详情处理
         this.props.appStore.refreshCodeAndId('top', value);
     }
 
     render() {
-        const { list } = this.state;
+        const { list} = this.state;
         let movie_list;
         let page_list;
         if (list){
             movie_list = list.map( (value, index) => {
                 return (
                     <li key={index} title={value.title}>
-                        <a href="javascript:void(0)" onClick={ (e) => this.detailHandler(value.id, e)}>
+                        <a href="#" onClick={ (e) => this.detailHandler(value.id, e)}>
                             <div className="li-img">
                                 <img src={value.images.medium} alt="dsknd"/>
                             </div>
@@ -103,7 +117,6 @@ class Top extends Component{
                             (
                                 () => {
                                     if (value.rating instanceof Object) {
-                                        console.log('评分');
                                         return (
                                             <div className="li-score">
                                                 <span>
@@ -112,7 +125,6 @@ class Top extends Component{
                                             </div>
                                         );
                                     } else {
-                                        console.log('日期');
                                         return (
                                             <div className="li-score">
                                                 <span>
@@ -150,7 +162,7 @@ class Top extends Component{
                     <div className="movie-title">
                         <h1>{this.props.title ? this.props.title : '未知'}</h1>
                     </div>
-                    <Spin spinning={this.props.appStore.loadingSign ? true : false} 
+                    <Spin spinning={this.state.sign ? true : false} 
                         size="large">
                         <div className="movie-container">
                             <div className="movie-list">

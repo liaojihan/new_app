@@ -3,13 +3,3 @@
   padding: 0;
   font-size: 16px;
 }
-
-img::after {
-    content: "";
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    background: url('images/static-picture.png') no-repeat center;
-}
