@@ -4,6 +4,9 @@ import { inject, observer } from "mobx-react";
 import { Link, Route } from 'react-router-dom'
 import topImage from '../images/film.jpg'
 import "./index.css"
+import Container from "../container";
+import Top from "../top"
+import Details from "../details"
 
 @inject('appStore') 
 @observer
@@ -52,6 +55,11 @@ class Home extends Component {
                         </form>
                     </div>
                 </div>
+                <Route path='/home' component={Container} />
+                <Route path='/hot' component={Top} />
+                <Route path='/soon' component={Top} />
+                <Route path='/bank' component={Top} />
+                <Route path='/details' component={Details}/>
                 <Footer/>
             </div>
         )

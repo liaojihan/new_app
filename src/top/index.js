@@ -3,7 +3,6 @@ import fetchJsonp from 'fetch-jsonp'
 import { inject, observer } from 'mobx-react'
 import './index.css'
 import { Spin, message } from 'antd';
-import { withRouter } from "react-router-dom";
 
 const info = () => {
     message.info("当前数据为空");
@@ -11,7 +10,6 @@ const info = () => {
 
 @inject('appStore') 
 @observer
-@withRouter
 class Top extends Component{
 
     constructor(props) {
@@ -52,7 +50,7 @@ class Top extends Component{
     }
 
     componentWillMount() {
-        console.log(this.props.location);
+        console.log(this.props);
     }
 
     componentDidMount() {

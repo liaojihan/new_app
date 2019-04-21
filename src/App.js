@@ -6,9 +6,6 @@ import Login from './login';
 // import Home from './home';
 import Other from './other'
 import MatchRouter from './login/match-route';
-import Container from "./container";
-import Top from "./top"
-import Details from "./details"
 
 @inject('appStore') 
 @observer
@@ -19,11 +16,6 @@ class App extends Component {
             <Switch>
                 <Route path="/login" component={Login} />
                 <MatchRouter path="/" component={Other} />
-                <Route path='/home' component={Container} />
-                <Route path='/hot' component={Top} />
-                <Route path='/soon' component={Top} />
-                <Route path='/bank' component={Top} />
-                <Route path='/details' component={Details}/>
             </Switch>
         );
     }
