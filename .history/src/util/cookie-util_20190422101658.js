@@ -1,0 +1,11 @@
+import Cookie from "js-cookie";
+import { func } from "prop-types";
+
+const COOKIE_ID = "SJDKSJFKLJDSF";
+const COOKIE_DATA = "2395UNh21u3~~￥@￥#￥@#";
+
+export default function isLogin() {
+    return _getCookie(COOKIE_ID, COOKIE_DATA);
+}
+
+functio
