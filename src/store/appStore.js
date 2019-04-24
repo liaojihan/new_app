@@ -1,5 +1,6 @@
-import { observable, action } from 'mobx'
+import { observable, action, configure } from 'mobx'
 
+configure({ enforceActions: 'observed'}) // 开启严格模式，只能在action下修改被观察对象
 class AppStore {
 
     @observable refreshCode = 0 // 0:首页，1:电影，2: 榜单， 3: 详情
@@ -7,17 +8,12 @@ class AppStore {
 
     @action
     refresh (code) {
-        this.refreshCode = code;
+        this.refreshCode = code
     }
 
-    setComponentStatus(sign) {
-        this.componentStatus = {
-            sign: sign
-        }
-    }
-
-    getComponentStatus() {
-        return this.componentStatus
+    @action
+    setComponentStatus(status) {
+        this.componentStatus = status
     }
 
 }

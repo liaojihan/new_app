@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Route,Switch} from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { inject, observer } from 'mobx-react/index'
 import Login from './login';
-import Home from './home';
+import Home from './components/home';
 import MatchRouter from './login/match-route';
 
 @inject('appStore') 
@@ -19,5 +19,5 @@ class App extends Component {
         );
     }
 }
-
+        
 export default App;
