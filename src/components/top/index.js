@@ -28,15 +28,17 @@ class Top extends Component{
                 top_url: 'http://api.douban.com/v2/movie/top250?apikey=0df993c66c0c636e29ecbb5344252a4a'
             },
             title: '未知',
-            key: this.props.match.params.url
+            key: props.match.params.url,
+            success: false // 是否发生错误
         }
     }   
 
-    loadList = (value, key) => {
+    loadList = () => {
+        console.log(this.state.pageCurrent);
         fetchJsonp(
-            this.state.urls[key] + 
+            this.state.urls[this.state.key] + 
             '&start=' + 
-            (value * this.state.pageSize - this.state.pageSize) + 
+            (this.state.pageCurrent * this.state.pageSize - this.state.pageSize) + 
             '&count=' + this.state.pageSize,
             {
                 method: 'get',
@@ -49,8 +51,7 @@ class Top extends Component{
             .then(result => {
                 this.setState({
                     list: typeof(result.entries) == 'undefined' ? result.subjects : result.entries,
-                    pageCurrent: value,
-                    pageStart: value * this.state.pageSize - this.state.pageSize,
+                    pageStart: this.state.pageCurrent * this.state.pageSize - this.state.pageSize,
                     pageTotal: Math.floor((result.total + this.state.pageSize - 1) / this.state.pageSize),
                     sign: false,
                     title: result.title
@@ -59,7 +60,7 @@ class Top extends Component{
     }
 
     componentDidMount() {
-        this.loadList(this.state.pageCurrent, this.props.match.params.url);
+        this.loadList();
     }
 
     componentWillUnmount() {
@@ -68,18 +69,28 @@ class Top extends Component{
         }
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextProps.url === this.props.url && nextState === this.state){
-            return false
+    static getDerivedStateFromProps(props, state) {
+        const key = props.match.params.url
+        if (key !== state.key) {
+            return {
+                key: key,
+                sign: true,
+                pageCurrent: 1
+            }
         }
-        return true
+        return null
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        if (nextProps.match.params.url !== this.state.key) {
-            this.setState({
-                sign: 
-            });
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextProps.match.params.url === this.state.key) {
+            return false
+        }
+        return true;
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.key !== this.state.key) {
+            this.loadList();
         }
     }
 
@@ -89,9 +100,10 @@ class Top extends Component{
             return;
         }
         this.setState({
-            sign: true
-        });
-        this.loadList(value, this.props.match.params.url);
+            sign: true,
+            pageCurrent: value
+        }, () => this.loadList());
+        
     }
 
     detailHandler = value => {
@@ -102,7 +114,7 @@ class Top extends Component{
 
     render() {
         console.log("执行了render()");
-        const { list} = this.state;
+        const { list } = this.state;
         let movie_list;
         let page_list;
         if (list){
