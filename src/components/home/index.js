@@ -11,15 +11,9 @@ import Details from "../details"
 @inject('appStore') 
 @observer
 class Home extends Component {
-    constructor() {
-        super();
-    }
+
     handleStatus = (index) => {
         this.props.appStore.refresh(Number.parseInt(index))
-    }
-
-    componentWillMount() {
-        
     }
 
     render() {
@@ -59,7 +53,7 @@ class Home extends Component {
                     </div>
                 </div>
                 <Switch>
-                    <Route exact path='/home' component={Container} />
+                    <Route exact path='/:url' component={Container}/>
                     <Route exact path='/hot/:url' component={Top} />
                     <Route exact path='/soon/:url' component={Top} />
                     <Route exact path='/bank/:url' component={Top} />

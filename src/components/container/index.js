@@ -13,7 +13,7 @@ import { withRouter } from "react-router-dom";
 class Container extends React.Component{
 
     constructor(props){
-        super(props);
+        super(props)
         this.state = {
             url1: [
                 'https://api.douban.com/v2/movie/in_theaters?start=0&count=12',
@@ -24,7 +24,9 @@ class Container extends React.Component{
                 'http://api.douban.com/v2/movie/top250?apikey=0df993c66c0c636e29ecbb5344252a4a&start=0&count=10'
             ]
         }
+        this.props.appStore.refresh(this.props.match.params.url);
     }
+
 
     render (){
         return (

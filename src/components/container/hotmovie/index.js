@@ -3,7 +3,7 @@ import all from '../../../images/arrow_right.png'
 import fetchJsonp from 'fetch-jsonp'
 import { inject, observer } from 'mobx-react'
 import { Spin } from "antd";
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 @inject('appStore')
 @observer
@@ -91,7 +91,7 @@ class HotMovie extends Component{
                 <Spin size="large" spinning={this.state.sign ? true : false}>
                     <div className="head">
                         <img src={all} alt=""/>
-                        <span className="all"><a href="#">全部</a></span>
+                        <span className="all"><Link to='/hot/film_url'>全部</Link></span>
                         <span className="hot">{this.props.title}</span>
                     </div>
                     <div className="movie-list">

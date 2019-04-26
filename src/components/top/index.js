@@ -34,9 +34,9 @@ class Top extends Component{
     }   
 
     loadList = () => {
-        console.log(this.state.pageCurrent);
+        const key = this.state.key
         fetchJsonp(
-            this.state.urls[this.state.key] + 
+            this.state.urls[key] + 
             '&start=' + 
             (this.state.pageCurrent * this.state.pageSize - this.state.pageSize) + 
             '&count=' + this.state.pageSize,
@@ -70,6 +70,7 @@ class Top extends Component{
     }
 
     static getDerivedStateFromProps(props, state) {
+        props.appStore.refresh(props.match.params.url)
         const key = props.match.params.url
         if (key !== state.key) {
             return {
@@ -79,13 +80,6 @@ class Top extends Component{
             }
         }
         return null
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextProps.match.params.url === this.state.key) {
-            return false
-        }
-        return true;
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -113,7 +107,6 @@ class Top extends Component{
     }
 
     render() {
-        console.log("执行了render()");
         const { list } = this.state;
         let movie_list;
         let page_list;
