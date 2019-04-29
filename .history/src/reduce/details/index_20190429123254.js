@@ -1,0 +1,4 @@
+
+const detailsReducer = {}
+
+export

@@ -1,0 +1,10 @@
+import * as type from "./actionType"
+import { getTopMovie } from '../services/top_service'
+
+export const loadTopMovie = (dispatch) => {
+    const response = getTopMovie()
+    dispatch({
+        type: type.LOAD_TOP_MOVIE.type,
+        payload: response
+    });
+}

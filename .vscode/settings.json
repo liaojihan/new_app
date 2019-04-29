@@ -3,5 +3,6 @@
     "editor.detectIndentation": false,
     "editor.formatOnType": true,
     "editor.formatOnSave": true,
-    "editor.fontSize": 18
+    "editor.fontSize": 22,
+    "workbench.editor.enablePreview": false
 }
